@@ -34,6 +34,7 @@ extension MessagesViewController {
     
     private func setupTextField() {
         tfContentView.addSubview(textField)
+        textField.delegate = self
         textField.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             textField.leadingAnchor.constraint(equalTo: tfContentView.leadingAnchor,
@@ -48,14 +49,19 @@ extension MessagesViewController {
     private func setupTableView() {
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.separatorStyle = .none
+        tableView.backgroundColor = UIColor(named: "appDarkBlue")
+        tableView.scrollsToTop = false
+        tableView.transform = CGAffineTransform(scaleX: 1, y: -1)
         tableView.register(MessageTableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(OutgoingMessageTableViewCell.self, forCellReuseIdentifier: "outgoingCell")
         view.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            tableView.leadingAnchor.constraint(equalTo: tfContentView.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: tfContentView.trailingAnchor),
-            tableView.topAnchor.constraint(equalTo: view.topAnchor),
-            tableView.bottomAnchor.constraint(equalTo: tfContentView.topAnchor)
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: tfContentView.topAnchor),
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
         ])
     }
 }

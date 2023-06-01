@@ -9,6 +9,11 @@ import Foundation
 
 protocol MessagesPresenter {
     
-    func getMessages()
-    func getData() -> [String]
+    func loadData()
+    
+    func getData() -> [MessageType]
+    
+    func loadNextPage()
+    
+    func sendNewMessage(_ text: String) 
 }

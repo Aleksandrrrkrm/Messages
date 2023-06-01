@@ -21,4 +21,11 @@ extension UIView {
         self.layer.borderColor = borderColor.cgColor
         return self
     }
+    
+//    @discardableResult
+//    func corner(radius: CGFloat) -> Self {
+//        self.layer.cornerRadius = radius
+//        self.clipsToBounds = true
+//        return self
+//    }
 }

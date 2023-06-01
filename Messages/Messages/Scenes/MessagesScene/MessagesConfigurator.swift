@@ -11,7 +11,9 @@ enum MessagesConfigurator {
     
     static func configure(view: MessagesViewController) {
         let router = MessagesRouter(view)
-        let presenter = MessagesPresenterImp(view, router)
+        let presenter = MessagesPresenterImp(view,
+                                             router,
+                                             CoreDataGatewayImp(coreDataStack: CoreStack.shared))
         view.presenter = presenter
     }
 

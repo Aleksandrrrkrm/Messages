@@ -18,3 +18,6 @@ enum Fonts: String {
     case montserratMedium = "Montserrat-Medium"
 }
 
+enum CoreDataEntity: String {
+    case name = "Messages"
+}
