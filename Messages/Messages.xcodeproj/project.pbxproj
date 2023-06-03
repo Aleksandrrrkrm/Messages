@@ -48,6 +48,9 @@
 		C2A4BA0B2A2910A6006634E3 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A4BA0A2A2910A6006634E3 /* CoreDataStack.swift */; };
 		C2A4BA0D2A291131006634E3 /* DataGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A4BA0C2A291131006634E3 /* DataGateway.swift */; };
 		C2A4BA0F2A2911B7006634E3 /* OutgoingMessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A4BA0E2A2911B7006634E3 /* OutgoingMessageModel.swift */; };
+		C2EB2ECA2A2BB58000AC1469 /* DetailVC+Views.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2EB2EC92A2BB58000AC1469 /* DetailVC+Views.swift */; };
+		C2EB2ECC2A2BBA0D00AC1469 /* ButtonExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2EB2ECB2A2BBA0D00AC1469 /* ButtonExt.swift */; };
+		C2EED1BD2A2A241B008BAB17 /* NotificationExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2EED1BC2A2A241B008BAB17 /* NotificationExt.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -94,6 +97,9 @@
 		C2A4BA0A2A2910A6006634E3 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		C2A4BA0C2A291131006634E3 /* DataGateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataGateway.swift; sourceTree = "<group>"; };
 		C2A4BA0E2A2911B7006634E3 /* OutgoingMessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutgoingMessageModel.swift; sourceTree = "<group>"; };
+		C2EB2EC92A2BB58000AC1469 /* DetailVC+Views.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DetailVC+Views.swift"; sourceTree = "<group>"; };
+		C2EB2ECB2A2BBA0D00AC1469 /* ButtonExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonExt.swift; sourceTree = "<group>"; };
+		C2EED1BC2A2A241B008BAB17 /* NotificationExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationExt.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -210,6 +216,7 @@
 		C29A399B2A27433700D2A416 /* DetailScene */ = {
 			isa = PBXGroup;
 			children = (
+				C2EB2EC82A2BB55800AC1469 /* VCExtensions */,
 				C29A39C62A27468C00D2A416 /* Protocols */,
 				C29A39BC2A27468300D2A416 /* DetailViewController.swift */,
 				C29A39BD2A27468300D2A416 /* DetailPresenterImp.swift */,
@@ -242,6 +249,8 @@
 				C29A39B32A27448A00D2A416 /* LabelExt.swift */,
 				C29A39D92A2771DD00D2A416 /* TextFieldExt.swift */,
 				C29A39E22A27760200D2A416 /* ViewExt.swift */,
+				C2EED1BC2A2A241B008BAB17 /* NotificationExt.swift */,
+				C2EB2ECB2A2BBA0D00AC1469 /* ButtonExt.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -322,6 +331,14 @@
 				C2A4BA0C2A291131006634E3 /* DataGateway.swift */,
 			);
 			path = CoreDataService;
+			sourceTree = "<group>";
+		};
+		C2EB2EC82A2BB55800AC1469 /* VCExtensions */ = {
+			isa = PBXGroup;
+			children = (
+				C2EB2EC92A2BB58000AC1469 /* DetailVC+Views.swift */,
+			);
+			path = VCExtensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -427,9 +444,12 @@
 				C29A39B82A27451700D2A416 /* Messages+CoreDataProperties.swift in Sources */,
 				C29A39AF2A27441400D2A416 /* BaseView.swift in Sources */,
 				C29A39E92A279C9800D2A416 /* MessageModel.swift in Sources */,
+				C2EED1BD2A2A241B008BAB17 /* NotificationExt.swift in Sources */,
+				C2EB2ECA2A2BB58000AC1469 /* DetailVC+Views.swift in Sources */,
 				C29A397F2A273FE300D2A416 /* SceneDelegate.swift in Sources */,
 				C2A4BA0B2A2910A6006634E3 /* CoreDataStack.swift in Sources */,
 				C2A4BA042A28F3CE006634E3 /* BaseMessageTableViewCell.swift in Sources */,
+				C2EB2ECC2A2BBA0D00AC1469 /* ButtonExt.swift in Sources */,
 				C29A39B72A27451700D2A416 /* Messages+CoreDataClass.swift in Sources */,
 				C29A39D62A27646800D2A416 /* VC+Views.swift in Sources */,
 				C29A39AC2A27438A00D2A416 /* MessagesPresenter.swift in Sources */,

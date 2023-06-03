@@ -15,5 +15,9 @@ protocol MessagesPresenter {
     
     func loadNextPage()
     
-    func sendNewMessage(_ text: String) 
+    func sendNewMessage(_ text: String)
+    
+    var isLoading: Bool { get }
+    
+    func openDetailScene(frame: CGRect, data: MessageType?)
 }

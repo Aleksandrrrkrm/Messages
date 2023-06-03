@@ -29,8 +29,14 @@ extension UILabel {
     }
     
     @discardableResult
-    func color(_ color: UIColor) -> Self {
+    func color(textColor color: UIColor) -> Self {
         self.textColor = color
+        return self
+    }
+    
+    @discardableResult
+    func color(backgraundColor: UIColor) -> Self {
+        self.backgroundColor = backgraundColor
         return self
     }
     

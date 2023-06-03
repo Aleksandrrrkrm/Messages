@@ -7,6 +7,10 @@
 
 import Foundation
 
+struct StringError: Error {
+    let message: String
+}
+
 struct RequestManager {
     
     static func request<T: Decodable>(requestType: Request, completion: @escaping (Result<T, Error>) -> Void) {
@@ -21,9 +25,13 @@ struct RequestManager {
                         completion(.success(suggestionsResponse))
                     } catch {
 #if DEBUG
-                        print("ошибка JSON: \(error)")
+//                        print("ошибка JSON: \(error)")
 #endif
-                        completion(.failure(error))
+                        if let strData = String(data: str, encoding: .utf8) {
+                            completion(.failure(StringError(message: strData)))
+                        } else {
+                            completion(.failure(error))
+                        }
                     }
                 case let .failure(error):
                     completion(.failure(error))

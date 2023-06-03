@@ -19,6 +19,7 @@ class MessageTableViewCell: BaseMessageTableViewCell {
         
         setupContentView()
         setupLabel()
+        setupProfileImageView()
         setupBaseLabel()
     }
     
@@ -29,10 +30,21 @@ class MessageTableViewCell: BaseMessageTableViewCell {
         baseView.clipsToBounds = true
         baseView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            baseView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5),
+            baseView.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: 5),
             baseView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
             baseView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5),
-            baseView.widthAnchor.constraint(lessThanOrEqualToConstant: self.frame.width)
+            baseView.widthAnchor.constraint(lessThanOrEqualTo: contentView.widthAnchor, constant: -80)
+        ])
+    }
+    
+    func setupProfileImageView() {
+        contentView.addSubview(profileImageView)
+        profileImageView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            profileImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5),
+            profileImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5),
+            profileImageView.heightAnchor.constraint(equalToConstant: 30),
+            profileImageView.widthAnchor.constraint(equalToConstant: 30)
         ])
     }
 }

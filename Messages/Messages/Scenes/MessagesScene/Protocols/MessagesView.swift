@@ -9,5 +9,9 @@ import UIKit
 
 protocol MessagesView: BaseView {
     
-    func reloadTableView()
+    func reloadTableView(_ indexPaths: [IndexPath])
+    
+    func showInternetAlert()
+    
+    func showErrorAlert(message: String)
 }

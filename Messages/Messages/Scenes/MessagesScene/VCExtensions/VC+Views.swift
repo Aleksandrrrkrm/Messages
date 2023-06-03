@@ -11,14 +11,9 @@ extension MessagesViewController {
     
     func setupUI() {
         view.backgroundColor = UIColor(named: "appDarkBlue")
-        configureNavBar()
         setupTextFieldContentView()
         setupTextField()
         setupTableView()
-    }
-    
-    private func configureNavBar() {
-        navigationController?.navigationBar.isHidden = true
     }
     
     private func setupTextFieldContentView () {
@@ -38,9 +33,9 @@ extension MessagesViewController {
         textField.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             textField.leadingAnchor.constraint(equalTo: tfContentView.leadingAnchor,
-                                           constant: 10),
+                                               constant: 10),
             textField.trailingAnchor.constraint(equalTo: tfContentView.trailingAnchor,
-                                           constant: -10),
+                                                constant: -10),
             textField.topAnchor.constraint(equalTo: tfContentView.topAnchor, constant: 10),
             textField.bottomAnchor.constraint(equalTo: tfContentView.centerYAnchor)
         ])
@@ -52,6 +47,9 @@ extension MessagesViewController {
         tableView.separatorStyle = .none
         tableView.backgroundColor = UIColor(named: "appDarkBlue")
         tableView.scrollsToTop = false
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
+        tapGesture.cancelsTouchesInView = false
+        tableView.addGestureRecognizer(tapGesture)
         tableView.transform = CGAffineTransform(scaleX: 1, y: -1)
         tableView.register(MessageTableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.register(OutgoingMessageTableViewCell.self, forCellReuseIdentifier: "outgoingCell")

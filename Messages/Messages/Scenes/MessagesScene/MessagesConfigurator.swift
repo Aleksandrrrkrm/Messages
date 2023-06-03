@@ -15,11 +15,7 @@ enum MessagesConfigurator {
                                              router,
                                              CoreDataGatewayImp(coreDataStack: CoreStack.shared))
         view.presenter = presenter
-    }
-
-    static func open(navigationController: UINavigationController) {
-        let view = MessagesViewController()
-        Self.configure(view: view)
-        navigationController.pushViewController(view, animated: true)
+        NotificationCenter.default.addObserver(presenter, selector: #selector(presenter.appWillEnterForeground),
+                                               name: .appWillEnterForeground, object: nil)
     }
 }

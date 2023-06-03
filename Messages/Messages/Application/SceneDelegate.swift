@@ -23,7 +23,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func sceneDidBecomeActive(_ scene: UIScene) {
-        
+        NotificationCenter.default.post(name: .appWillEnterForeground, object: nil)
+        print("@@@@@@@@@")
     }
 }
 

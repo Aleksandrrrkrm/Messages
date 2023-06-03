@@ -9,7 +9,7 @@ import CoreData
 
 protocol CoreDataGateway: AnyObject {
     
-    func getData(sortDescriptors: [NSSortDescriptor]?) -> [String]?
+    func getData(sortDescriptors: [NSSortDescriptor]?) -> [MessageType]?
     
     func deleteAllData()
     
@@ -26,16 +26,18 @@ class CoreDataGatewayImp: CoreDataGateway {
         self.coreDataStack = coreDataStack
     }
     
-    func getData(sortDescriptors: [NSSortDescriptor]?) -> [String]? {
+    func getData(sortDescriptors: [NSSortDescriptor]?) -> [MessageType]? {
         let fetchRequest: NSFetchRequest<Messages> = Messages.fetchRequest()
         if let sortDescriptors {
             fetchRequest.sortDescriptors = sortDescriptors
         }
         do {
-            var dataModel: [String] = []
+            var dataModel: [MessageType] = []
             let data = try coreDataStack.managedContext.fetch(fetchRequest)
             data.forEach {
-                dataModel.append($0.text ?? "")
+                dataModel.append(MessageType.outgoing($0.text ?? "",
+                                                      "https://upload.wikimedia.org/wikipedia/commons/f/f5/Pic-vk-allaboutme-ava-2.jpg",
+                                                      $0.date ?? Date()))
             }
             return dataModel
         } catch let error {

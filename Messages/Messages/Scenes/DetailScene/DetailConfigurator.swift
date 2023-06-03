@@ -9,14 +9,19 @@ import UIKit
 
 enum DetailConfigurator {
     
-    static func configure(view: DetailViewController) {
+    static func configure(view: DetailViewController,
+                          frame: CGRect,
+                          data: MessageType?) {
         let presenter = DetailPresenterImp(view)
         view.presenter = presenter
+        view.setupBaseLabel(frame: frame, data: data)
     }
 
-    static func open(navigationController: UINavigationController) {
+    static func open(navigationController: UINavigationController,
+                     frame: CGRect,
+                     data: MessageType?) {
         let view = DetailViewController()
-        Self.configure(view: view)
-        navigationController.pushViewController(view, animated: true)
+        Self.configure(view: view, frame: frame, data: data)
+        navigationController.pushViewController(view, animated: false)
     }
 }
