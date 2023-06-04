@@ -11,7 +11,11 @@ protocol MessagesView: BaseView {
     
     func reloadTableView(_ indexPaths: [IndexPath])
     
+    func deleteRow(_ indexPaths: [IndexPath])
+    
     func showInternetAlert()
     
     func showErrorAlert(message: String)
+    
+    func reload()
 }

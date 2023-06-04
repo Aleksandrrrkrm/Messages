@@ -15,10 +15,17 @@ class MessagesRouter {
         self.view = view
     }
     
-    func openSomeScene(frame: CGRect, data: MessageType?) {
+    func openSomeScene(frame: CGRect,
+                       data: MessageType?,
+                       indexPath: Int,
+                       completion: @escaping (_ index: Int) -> ()) {
         guard let navController = self.view?.navigationController else {
             return
         }
-        DetailConfigurator.open(navigationController: navController, frame: frame, data: data)
+        DetailConfigurator.open(navigationController: navController,
+                                frame: frame,
+                                data: data,
+                                indexPath: indexPath,
+                                completion: completion)
     }
 }

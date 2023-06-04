@@ -11,17 +11,28 @@ enum DetailConfigurator {
     
     static func configure(view: DetailViewController,
                           frame: CGRect,
-                          data: MessageType?) {
-        let presenter = DetailPresenterImp(view)
+                          data: MessageType?,
+                          indexPath: Int,
+                          completion: @escaping (_ index: Int) -> ()) {
+        let presenter = DetailPresenterImp(view, completion: completion)
+        presenter.currentMessageData = data
+        presenter.currentMessageIndex = indexPath
         view.presenter = presenter
-        view.setupBaseLabel(frame: frame, data: data)
+        view.currentMessageFrame = frame
+//        view.setupBaseLabel(frame: frame, data: data)
     }
 
     static func open(navigationController: UINavigationController,
                      frame: CGRect,
-                     data: MessageType?) {
+                     data: MessageType?,
+                     indexPath: Int,
+                     completion: @escaping (_ index: Int) -> ()) {
         let view = DetailViewController()
-        Self.configure(view: view, frame: frame, data: data)
+        Self.configure(view: view,
+                       frame: frame,
+                       data: data,
+                       indexPath: indexPath,
+                       completion: completion)
         navigationController.pushViewController(view, animated: false)
     }
 }

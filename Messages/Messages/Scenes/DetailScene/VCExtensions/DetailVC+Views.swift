@@ -13,7 +13,6 @@ extension DetailViewController {
         view.addSubview(baseView)
         baseView.alpha = 0
         view.backgroundColor = UIColor(named: "appDarkBlue")
-//        configureNavBar()
         setupMessageLabel()
         setupDeleteButton()
         setupImageView()
@@ -29,13 +28,13 @@ extension DetailViewController {
         switch data {
         case let .outgoing(text, url, date):
             messageLabel.text = text
-            dateLabel.text = format(from: date, to: "dd.mm.YY")
+            dateLabel.text = format(from: date, to: "dd.MM.YY")
             baseView.backgroundColor(UIColor(named: "appOutgoingMessage") ?? .purple)
             baseView.frame = CGRect(x: frame.origin.x + 50, y: y, width: frame.width - 90, height: frame.height)
             isIncomingMessage = false
             
         case let .incoming(text, url, date):
-            dateLabel.text = format(from: date, to: "dd.mm.YY")
+            dateLabel.text = format(from: date, to: "dd.MM.YY")
             messageLabel.text = text
             baseView.backgroundColor(UIColor(named: "appIncomeMessage") ?? .blue)
             baseView.frame = CGRect(x: frame.origin.x + 40, y: y, width: frame.width - 90, height: frame.height)
@@ -63,6 +62,7 @@ extension DetailViewController {
         view.addSubview(deleteButton)
         deleteButton.alpha = 0
         deleteButton.tintColor = .red
+        deleteButton.addTarget(self, action: #selector(deletePressed), for: .touchUpInside)
         deleteButton.setTitle("Удалить", for: .normal)
         deleteButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -120,7 +120,6 @@ extension DetailViewController {
         dateFormatter.dateFormat = mask
         let formattedDate = dateFormatter.string(from: date)
         return formattedDate
-        
     }
     
     ///

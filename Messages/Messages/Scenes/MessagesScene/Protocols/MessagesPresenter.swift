@@ -19,5 +19,5 @@ protocol MessagesPresenter {
     
     var isLoading: Bool { get }
     
-    func openDetailScene(frame: CGRect, data: MessageType?)
+    func openDetailScene(frame: CGRect, indexPath: Int)
 }

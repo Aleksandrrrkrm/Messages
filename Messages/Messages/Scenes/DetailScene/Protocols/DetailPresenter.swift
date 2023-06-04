@@ -9,4 +9,7 @@ import Foundation
 
 protocol DetailPresenter {
     
+    func getMessageType() -> MessageType?
+    
+    func deleteAndBack()
 }

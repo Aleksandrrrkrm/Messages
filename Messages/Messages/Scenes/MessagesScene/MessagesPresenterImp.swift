@@ -112,7 +112,17 @@ class MessagesPresenterImp: MessagesPresenter {
         }
     }
     
-    func openDetailScene(frame: CGRect, data: MessageType?) {
-        router.openSomeScene(frame: frame, data: data)
+    func deleteRow(_ index: Int) {
+        print(index)
+        allMessages.remove(at: index)
+        view?.reload()
+//        let newIndexPath = IndexPath(row: index, section: 0)
+//        view?.deleteRow([newIndexPath])
+    }
+    
+    func openDetailScene(frame: CGRect, indexPath: Int) {
+        router.openSomeScene(frame: frame,
+                             data: allMessages[indexPath],
+                             indexPath: indexPath, completion: deleteRow)
     }
 }

@@ -19,7 +19,7 @@ class BaseMessageTableViewCell: UITableViewCell {
     var messageLabel = UIMessageLabel()
         .color(textColor: .white)
         .setManyLines()
-        .font(UIFont(name: Fonts.montserratSemiBold.rawValue, size: 18) ?? UIFont())
+        .font(UIFont(name: Fonts.montserratMedium.rawValue, size: 16) ?? UIFont())
         .corner(radius: 10)
     
     func setupContentView() {
@@ -41,10 +41,10 @@ class BaseMessageTableViewCell: UITableViewCell {
         messageLabel.backgroundColor = .clear
         messageLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            messageLabel.leadingAnchor.constraint(equalTo: baseView.leadingAnchor, constant: 15),
-            messageLabel.topAnchor.constraint(equalTo: baseView.topAnchor, constant: 10),
-            messageLabel.bottomAnchor.constraint(equalTo: baseView.bottomAnchor, constant: -10),
-            messageLabel.trailingAnchor.constraint(equalTo: baseView.trailingAnchor, constant: -15)
+            messageLabel.leadingAnchor.constraint(equalTo: baseView.leadingAnchor, constant: 10),
+            messageLabel.topAnchor.constraint(equalTo: baseView.topAnchor, constant: 5),
+            messageLabel.bottomAnchor.constraint(equalTo: baseView.bottomAnchor, constant: -5),
+            messageLabel.trailingAnchor.constraint(equalTo: baseView.trailingAnchor, constant: -10)
         ])
     }
     

@@ -101,7 +101,7 @@ class MessagesViewController: UIViewController {
                     let cellFrame = tableView.rectForRow(at: indexPath)
                     let cellFrameOnScreen = tableView.convert(cellFrame, to: nil)
                        
-                    presenter?.openDetailScene(frame: cellFrameOnScreen, data: presenter?.getData()[indexPath.row])
+                    presenter?.openDetailScene(frame: cellFrameOnScreen, indexPath: indexPath.row)
                 }
             }
         }
@@ -117,6 +117,20 @@ class MessagesViewController: UIViewController {
 }
 
 extension MessagesViewController: MessagesView {
+    
+    func reload() {
+        performInMainThread {
+            self.tableView.reloadData()
+        }
+    }
+    
+    func deleteRow(_ indexPaths: [IndexPath]) {
+        performInMainThread {
+            self.tableView.beginUpdates()
+            self.tableView.deleteRows(at: indexPaths, with: .automatic)
+            self.tableView.endUpdates()
+        }
+    }
     
     func reloadTableView(_ indexPaths: [IndexPath]) {
         performInMainThread {
