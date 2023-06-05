@@ -18,8 +18,8 @@ extension MessagesViewController {
     }
     
     private func setupBaseView() {
-        view.backgroundColor = UIColor(named: "appDarkBlue")
-        baseView.backgroundColor = UIColor(named: "appDarkBlue")
+        view.backgroundColor = UIColor(named: Colors.appDarkBlue.rawValue)
+        baseView.backgroundColor = UIColor(named: Colors.appDarkBlue.rawValue)
         view.addSubview(baseView)
         baseView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -63,8 +63,8 @@ extension MessagesViewController {
         tableView.dataSource = self
         tableView.transform = CGAffineTransform(scaleX: 1, y: -1)
         tableView.backgroundView = activityIndicator
-        tableView.register(MessageTableViewCell.self, forCellReuseIdentifier: "cell")
-        tableView.register(OutgoingMessageTableViewCell.self, forCellReuseIdentifier: "outgoingCell")
+        tableView.register(MessageTableViewCell.self, forCellReuseIdentifier: CellsID.incoming.rawValue)
+        tableView.register(OutgoingMessageTableViewCell.self, forCellReuseIdentifier: CellsID.outgoing.rawValue)
         baseView.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -77,7 +77,7 @@ extension MessagesViewController {
     
     private func setupTitleView() {
         titleView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height / 9)
-        titleLabel.text = "Тестовое задание"
+        titleLabel.text = Strings.testCase.rawValue
         view.addSubview(titleView)
         titleView.addSubview(titleLabel)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false

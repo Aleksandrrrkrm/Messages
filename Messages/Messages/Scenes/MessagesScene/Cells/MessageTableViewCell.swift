@@ -25,7 +25,7 @@ class MessageTableViewCell: BaseMessageTableViewCell {
     
     private func setupBaseLabel() {
         contentView.addSubview(baseView)
-        baseView.backgroundColor = UIColor(named: "appIncomeMessage")
+        baseView.backgroundColor = UIColor(named: Colors.appIncomeMessage.rawValue)
         baseView.layer.cornerRadius = 15
         baseView.clipsToBounds = true
         baseView.translatesAutoresizingMaskIntoConstraints = false

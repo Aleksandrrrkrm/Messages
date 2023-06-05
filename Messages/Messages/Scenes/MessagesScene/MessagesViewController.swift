@@ -17,27 +17,27 @@ class MessagesViewController: UIViewController {
     var activityIndicator = UIActivityIndicatorView(style: .medium)
     
     let titleView = UIView()
-        .backgroundColor(UIColor(named: "appMediumBlack") ?? .blue)
+        .backgroundColor(UIColor(named: Colors.appMediumBlack.rawValue) ?? .blue)
     
     let titleLabel = UILabel()
         .alignment(.center)
         .color(textColor: .white)
-        .color(backgroundColor: UIColor(named: "appMediumBlack") ?? .blue)
+        .color(backgroundColor: UIColor(named: Colors.appMediumBlack.rawValue) ?? .blue)
         .font(UIFont(name: Fonts.montserratMedium.rawValue, size: 18) ?? UIFont())
     
     var tableView = UITableView()
-        .backgroundColor(UIColor(named: "appDarkBlue") ?? .blue)
+        .backgroundColor(UIColor(named: Colors.appDarkBlue.rawValue) ?? .blue)
         .hideSeparator()
         .scrollsToPop(false)
     
     var tfContentView = UIView()
-        .backgroundColor(UIColor(named: "appMediumBlack") ?? .blue)
-        .border(borderWidth: 0.3, borderColor: UIColor(named: "appMediumBlue") ?? .gray)
+        .backgroundColor(UIColor(named: Colors.appMediumBlack.rawValue) ?? .blue)
+        .border(borderWidth: 0.3, borderColor: UIColor(named: Colors.appMediumBlue.rawValue) ?? .gray)
     
     var textField = UITextField()
         .font(name: Fonts.montserratMedium.rawValue, size: 17)
         .color(textColor: .white)
-        .color(backgraundColor: UIColor(named: "appBlack") ?? .blue)
+        .color(backgraundColor: UIColor(named: Colors.appBlack.rawValue) ?? .blue)
         .placeholder(text: Strings.message.rawValue, .gray)
         .setLeadingPadding(20)
         .corner(radius: 15)
@@ -157,7 +157,7 @@ extension MessagesViewController: MessagesView {
         performInMainThread {
             self.showAlert(withTitle: Strings.errorTitle.rawValue,
                            message: message,
-                           actionTitle: "Повторить",
+                           actionTitle: Strings.retry.rawValue,
                            viewController: self) {
                 self.presenter?.loadNextPage()
             }

@@ -20,7 +20,7 @@ class OutgoingMessageTableViewCell: BaseMessageTableViewCell {
     
     private func setupBaseLabel() {
         contentView.addSubview(baseView)
-        baseView.backgroundColor = UIColor(named: "appOutgoingMessage")
+        baseView.backgroundColor = UIColor(named: Colors.appOutgoingMessage.rawValue)
         baseView.layer.cornerRadius = 15
         baseView.clipsToBounds = true
         baseView.translatesAutoresizingMaskIntoConstraints = false

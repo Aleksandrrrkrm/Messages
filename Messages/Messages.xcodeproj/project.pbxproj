@@ -113,6 +113,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C279917F2A2E2C3800D138A5 /* ApiClient */ = {
+			isa = PBXGroup;
+			children = (
+				C29A39CE2A27479300D2A416 /* ApiClient.swift */,
+				C29A39D02A2747B300D2A416 /* RequestSettings.swift */,
+				C29A39D22A2747D800D2A416 /* RequestManager.swift */,
+			);
+			path = ApiClient;
+			sourceTree = "<group>";
+		};
 		C29A39702A273FE300D2A416 = {
 			isa = PBXGroup;
 			children = (
@@ -139,7 +149,6 @@
 				C29A39942A27422B00D2A416 /* Services */,
 				C29A39932A27420D00D2A416 /* Application */,
 				C29A39972A27424C00D2A416 /* Info */,
-				C29A39B92A27452400D2A416 /* CoreData */,
 			);
 			path = Messages;
 			sourceTree = "<group>";
@@ -254,14 +263,14 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
-		C29A39B92A27452400D2A416 /* CoreData */ = {
+		C29A39B92A27452400D2A416 /* CoreDataFiles */ = {
 			isa = PBXGroup;
 			children = (
 				C29A39B52A27451700D2A416 /* Messages+CoreDataClass.swift */,
 				C29A39B62A27451700D2A416 /* Messages+CoreDataProperties.swift */,
 				C29A39852A273FE300D2A416 /* Messages.xcdatamodeld */,
 			);
-			path = CoreData;
+			path = CoreDataFiles;
 			sourceTree = "<group>";
 		};
 		C29A39C62A27468C00D2A416 /* Protocols */ = {
@@ -276,9 +285,7 @@
 		C29A39CB2A27473D00D2A416 /* NetworkService */ = {
 			isa = PBXGroup;
 			children = (
-				C29A39CE2A27479300D2A416 /* ApiClient.swift */,
-				C29A39D02A2747B300D2A416 /* RequestSettings.swift */,
-				C29A39D22A2747D800D2A416 /* RequestManager.swift */,
+				C279917F2A2E2C3800D138A5 /* ApiClient */,
 				C29A39CC2A27475800D2A416 /* InternetConnection.swift */,
 				C27991792A2DDA5600D138A5 /* ImageLoader.swift */,
 			);
@@ -327,6 +334,7 @@
 		C2A4BA092A29108F006634E3 /* CoreDataService */ = {
 			isa = PBXGroup;
 			children = (
+				C29A39B92A27452400D2A416 /* CoreDataFiles */,
 				C2A4BA0A2A2910A6006634E3 /* CoreDataStack.swift */,
 				C2A4BA0C2A291131006634E3 /* DataGateway.swift */,
 			);

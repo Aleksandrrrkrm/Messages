@@ -14,7 +14,7 @@ class BaseMessageTableViewCell: UITableViewCell {
     var activity = UIActivityIndicatorView(style: .medium)
 
     var baseView = UIView()
-        .backgroundColor(UIColor(named: "appDarkBlue") ?? .gray)
+        .backgroundColor(UIColor(named: Colors.appDarkBlue.rawValue) ?? .gray)
     
     var messageLabel = UILabel()
         .color(textColor: .white)
@@ -24,7 +24,7 @@ class BaseMessageTableViewCell: UITableViewCell {
     
     func setupContentView() {
         selectionStyle = .none
-        contentView.backgroundColor = UIColor(named: "appDarkBlue")
+        contentView.backgroundColor = UIColor(named: Colors.appDarkBlue.rawValue)
     }
     
     func setupActivity() {

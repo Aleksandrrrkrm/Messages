@@ -32,12 +32,12 @@ class MessagesPresenterImp: MessagesPresenter {
     func sendNewMessage(_ text: String) {
         let messageDate = Date()
         coreDataGateway.saveData(MessageModel(isMyMessage: true,
-                                              url: "https://upload.wikimedia.org/wikipedia/commons/f/f5/Pic-vk-allaboutme-ava-2.jpg",
+                                              url: Strings.myAVA.rawValue,
                                               text: text,
                                               date: messageDate),
                                  completion: nil)
         allMessages.insert(MessageModel(isMyMessage: true,
-                                        url: "https://upload.wikimedia.org/wikipedia/commons/f/f5/Pic-vk-allaboutme-ava-2.jpg",
+                                        url: Strings.myAVA.rawValue,
                                         text: text,
                                         date: messageDate),
                            at: 0)
@@ -105,7 +105,7 @@ class MessagesPresenterImp: MessagesPresenter {
                 self?.countOfMessage = data.result.count
                 data.result.forEach {
                     self?.allMessages.append(MessageModel(isMyMessage: false,
-                                                          url: "https://www.perunica.ru/uploads/posts/2019-03/1552932077_1.jpg",
+                                                          url: Strings.serverAVA.rawValue,
                                                           text: $0,
                                                           date: Date()))
                 }

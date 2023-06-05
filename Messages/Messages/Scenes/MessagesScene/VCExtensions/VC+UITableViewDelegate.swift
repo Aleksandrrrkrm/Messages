@@ -14,9 +14,9 @@ extension MessagesViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell",
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: CellsID.incoming.rawValue,
                                                        for: indexPath) as? MessageTableViewCell,
-              let outCell = tableView.dequeueReusableCell(withIdentifier: "outgoingCell",
+              let outCell = tableView.dequeueReusableCell(withIdentifier: CellsID.outgoing.rawValue,
                                                           for: indexPath) as? OutgoingMessageTableViewCell
         else {
             return UITableViewCell()
