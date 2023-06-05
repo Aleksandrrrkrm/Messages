@@ -11,32 +11,32 @@ class DetailViewController: UIViewController {
     
     internal var presenter: DetailPresenter?
     
-    var currentMessageFrame: CGRect?
-    
+    // MARK: - UI elements
     var baseView = UIView()
+    var imageView = UIImageView()
+    var deleteButton = UIButton(type: .system)
     
-    var isIncomingMessage = false
-    
-    var messageLabel = UIMessageLabel()
+    var messageLabel = UILabel()
         .color(textColor: .white)
         .setManyLines()
         .font(UIFont(name: Fonts.montserratMedium.rawValue, size: 16) ?? UIFont())
         .corner(radius: 10)
-        .color(backgraundColor: .clear)
-    
-    var imageView = UIImageView()
+        .color(backgroundColor: .clear)
     
     var dateLabel = UILabel()
         .color(textColor: .lightGray)
         .font(UIFont(name: Fonts.montserratMedium.rawValue, size: 12) ?? UIFont())
-        .color(backgraundColor: .clear)
+        .color(backgroundColor: .clear)
     
-    var deleteButton = UIButton(type: .system)
+    // MARK: - Properties
+    var currentMessageFrame: CGRect?
+    var isIncomingMessage = false
         
+    // MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configureUI()
+        getData()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -45,11 +45,9 @@ class DetailViewController: UIViewController {
         showViews()
     }
     
-    private func configureUI() {
-        guard let message = presenter?.getMessageType(),
-              let currentMessageFrame else { return }
-        setupBaseLabel(frame: currentMessageFrame, data: message)
-        setupUI()
+    // MARK: - Usage
+    private func getData() {
+        presenter?.getData()
     }
     
     private func showViews() {
@@ -76,6 +74,18 @@ class DetailViewController: UIViewController {
     }
 }
 
+// MARK: - Protocol methods
 extension DetailViewController: DetailView {
     
+    func setImage(_ image: UIImage) {
+        performInMainThread {
+            self.imageView.image = image
+        }
+    }
+    
+    func configureUI(type: MessageModel) {
+        guard let currentMessageFrame else { return }
+        setupBaseLabel(frame: currentMessageFrame, data: type)
+        setupUI()
+    }
 }

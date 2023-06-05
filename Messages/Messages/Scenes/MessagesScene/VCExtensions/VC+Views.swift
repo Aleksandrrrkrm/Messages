@@ -10,19 +10,33 @@ import UIKit
 extension MessagesViewController {
     
     func setupUI() {
-        view.backgroundColor = UIColor(named: "appDarkBlue")
+        setupBaseView()
         setupTextFieldContentView()
         setupTextField()
         setupTableView()
+        setupTitleView()
+    }
+    
+    private func setupBaseView() {
+        view.backgroundColor = UIColor(named: "appDarkBlue")
+        baseView.backgroundColor = UIColor(named: "appDarkBlue")
+        view.addSubview(baseView)
+        baseView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            baseView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            baseView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            baseView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            baseView.topAnchor.constraint(equalTo: view.topAnchor, constant: (view.frame.height / 9) + 1)
+        ])
     }
     
     private func setupTextFieldContentView () {
-        view.addSubview(tfContentView)
+        baseView.addSubview(tfContentView)
         tfContentView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            tfContentView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tfContentView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tfContentView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            tfContentView.leadingAnchor.constraint(equalTo: baseView.leadingAnchor),
+            tfContentView.trailingAnchor.constraint(equalTo: baseView.trailingAnchor),
+            tfContentView.bottomAnchor.constraint(equalTo: baseView.bottomAnchor),
             tfContentView.heightAnchor.constraint(equalToConstant: view.bounds.height / 10)
         ])
     }
@@ -42,24 +56,34 @@ extension MessagesViewController {
     }
     
     private func setupTableView() {
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.separatorStyle = .none
-        tableView.backgroundColor = UIColor(named: "appDarkBlue")
-        tableView.scrollsToTop = false
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         tapGesture.cancelsTouchesInView = false
         tableView.addGestureRecognizer(tapGesture)
+        tableView.delegate = self
+        tableView.dataSource = self
         tableView.transform = CGAffineTransform(scaleX: 1, y: -1)
+        tableView.backgroundView = activityIndicator
         tableView.register(MessageTableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.register(OutgoingMessageTableViewCell.self, forCellReuseIdentifier: "outgoingCell")
-        view.addSubview(tableView)
+        baseView.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableView.leadingAnchor.constraint(equalTo: baseView.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: baseView.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: tfContentView.topAnchor),
-            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
+            tableView.topAnchor.constraint(equalTo: baseView.topAnchor)
+        ])
+    }
+    
+    private func setupTitleView() {
+        titleView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height / 9)
+        titleLabel.text = "Тестовое задание"
+        view.addSubview(titleView)
+        titleView.addSubview(titleLabel)
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            titleLabel.bottomAnchor.constraint(equalTo: titleView.bottomAnchor, constant: -10),
+            titleLabel.centerXAnchor.constraint(equalTo: titleView.centerXAnchor)
         ])
     }
 }

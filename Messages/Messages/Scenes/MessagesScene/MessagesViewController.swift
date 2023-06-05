@@ -12,9 +12,23 @@ class MessagesViewController: UIViewController {
     internal var presenter: MessagesPresenter?
     
     // MARK: - UI elements
-    var tableView = UITableView()
-    
+    var baseView = UIView()
     let feedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
+    var activityIndicator = UIActivityIndicatorView(style: .medium)
+    
+    let titleView = UIView()
+        .backgroundColor(UIColor(named: "appMediumBlack") ?? .blue)
+    
+    let titleLabel = UILabel()
+        .alignment(.center)
+        .color(textColor: .white)
+        .color(backgroundColor: UIColor(named: "appMediumBlack") ?? .blue)
+        .font(UIFont(name: Fonts.montserratMedium.rawValue, size: 18) ?? UIFont())
+    
+    var tableView = UITableView()
+        .backgroundColor(UIColor(named: "appDarkBlue") ?? .blue)
+        .hideSeparator()
+        .scrollsToPop(false)
     
     var tfContentView = UIView()
         .backgroundColor(UIColor(named: "appMediumBlack") ?? .blue)
@@ -29,7 +43,6 @@ class MessagesViewController: UIViewController {
         .corner(radius: 15)
     
     // MARK: - Life cycle
-    
     override func loadView() {
         super.loadView()
         
@@ -47,44 +60,34 @@ class MessagesViewController: UIViewController {
         super.viewWillAppear(animated)
         
         hideNavBar()
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
         showNavBar()
+        hideKeyboard()
     }
     
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
     
-    private func showNavBar() {
-        navigationController?.navigationBar.isHidden = false
-    }
-    
-    private func hideNavBar() {
-        navigationController?.navigationBar.isHidden = true
-    }
-    
+    // MARK: - Usage
     @objc func keyboardWillShow(_ notification: Notification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            let chatHeight = tfContentView.bounds.height / 2.5
-            let offsetY = keyboardSize.height - chatHeight// - (screenHeight - chatHeight)
+            let chatHeight = tfContentView.frame.height / 2.5
+            let offsetY = keyboardSize.height - chatHeight
             if offsetY > 0 {
-                //                UIView.animate(withDuration: 3) {
-                self.view.frame.origin.y = -offsetY
-                //                }
+                self.baseView.bounds.origin.y = offsetY
+
             }
         }
     }
     
     @objc func keyboardWillHide(_ notification: Notification) {
-        //        UIView.animate(withDuration: 1) {
-        self.view.frame.origin.y = 0
-        //        }
+        
+        self.baseView.bounds.origin.y = 0
     }
     
     
@@ -111,32 +114,27 @@ class MessagesViewController: UIViewController {
         textField.resignFirstResponder()
     }
     
-    @objc func handleLongPress(_ gesture: UILongPressGestureRecognizer) {
-        print("Ячейка была зажата в течение 1 секунды")
+    private func showNavBar() {
+        navigationController?.navigationBar.isHidden = false
+    }
+    
+    private func hideNavBar() {
+        navigationController?.navigationBar.isHidden = true
     }
 }
 
+// MARK: - Protocol methods
 extension MessagesViewController: MessagesView {
     
-    func reload() {
+    func startActivity() {
         performInMainThread {
-            self.tableView.reloadData()
+            self.activityIndicator.startAnimating()
         }
     }
     
-    func deleteRow(_ indexPaths: [IndexPath]) {
+    func stopActivity() {
         performInMainThread {
-            self.tableView.beginUpdates()
-            self.tableView.deleteRows(at: indexPaths, with: .automatic)
-            self.tableView.endUpdates()
-        }
-    }
-    
-    func reloadTableView(_ indexPaths: [IndexPath]) {
-        performInMainThread {
-            self.tableView.beginUpdates()
-            self.tableView.insertRows(at: indexPaths, with: .automatic)
-            self.tableView.endUpdates()
+            self.activityIndicator.stopAnimating()
         }
     }
     
@@ -166,4 +164,25 @@ extension MessagesViewController: MessagesView {
         }
     }
     
+    func reload() {
+        performInMainThread {
+            self.tableView.reloadData()
+        }
+    }
+    
+    func deleteRow(_ indexPaths: [IndexPath]) {
+        performInMainThread {
+            self.tableView.beginUpdates()
+            self.tableView.deleteRows(at: indexPaths, with: .automatic)
+            self.tableView.endUpdates()
+        }
+    }
+    
+    func reloadTableView(_ indexPaths: [IndexPath]) {
+        performInMainThread {
+            self.tableView.beginUpdates()
+            self.tableView.insertRows(at: indexPaths, with: .automatic)
+            self.tableView.endUpdates()
+        }
+    }
 }

@@ -28,12 +28,14 @@ extension MessagesViewController: UITableViewDelegate, UITableViewDataSource {
         outCell.transform = CGAffineTransform(scaleX: 1, y: -1)
         cell.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(longtap(_:))))
         outCell.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(longtap(_:))))
-        switch data[indexPath.row] {
-        case let .outgoing(text, _, _):
-            outCell.setMessage(text)
+        
+        let currentData = data[indexPath.row]
+        
+        if data[indexPath.row].isMyMessage {
+            outCell.setData(currentData.text, url: currentData.url)
             return outCell
-        case let .incoming(text, _, _):
-            cell.setMessage(text)
+        } else {
+            cell.setData(currentData.text, url: currentData.url)
             return cell
         }
     }
@@ -44,5 +46,4 @@ extension MessagesViewController: UITableViewDelegate, UITableViewDataSource {
             presenter?.loadNextPage()
         }
     }
-    
 }

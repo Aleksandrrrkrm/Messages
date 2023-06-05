@@ -11,7 +11,7 @@ protocol MessagesPresenter {
     
     func loadData()
     
-    func getData() -> [MessageType]
+    func getData() -> [MessageModel]
     
     func loadNextPage()
     

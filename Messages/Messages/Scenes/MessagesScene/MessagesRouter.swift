@@ -16,7 +16,7 @@ class MessagesRouter {
     }
     
     func openSomeScene(frame: CGRect,
-                       data: MessageType?,
+                       data: MessageModel?,
                        indexPath: Int,
                        completion: @escaping (_ index: Int) -> ()) {
         guard let navController = self.view?.navigationController else {

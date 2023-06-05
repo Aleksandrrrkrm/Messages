@@ -13,7 +13,9 @@ protocol CoreDataGateway: AnyObject {
     
     func deleteAllData()
     
-    func saveData(_ data: OutgoingMessageModel, completion: (() -> ())?)
+    func saveData(_ data: MessageModel, completion: (() -> ())?)
+    
+    func deleteData(withText text: String, at date: Date)
     
     func saveContext()
 }
@@ -40,10 +42,7 @@ class CoreDataGatewayImp: CoreDataGateway {
                                                       $0.date ?? Date()))
             }
             return dataModel
-        } catch let error {
-#if DEBUG
-            print("ошибка getData \(error.localizedDescription)")
-#endif
+        } catch _ {
             return nil
         }
     }
@@ -55,9 +54,6 @@ class CoreDataGatewayImp: CoreDataGateway {
         
         do {
             try coreDataStack.managedContext.execute(deleteRequest)
-#if DEBUG
-            print("удалено")
-#endif
             
         } catch let error {
 #if DEBUG
@@ -66,16 +62,16 @@ class CoreDataGatewayImp: CoreDataGateway {
         }
     }
     
-    func saveData(_ data: OutgoingMessageModel, completion: (() -> ())?) {
+    func saveData(_ data: MessageModel, completion: (() -> ())?) {
         coreDataStack.backgroundContext.perform { [weak self] in
             guard let context = self?.coreDataStack.backgroundContext else {
                 return
             }
-                
-                    let model = Messages(context: context)
+            
+            let model = Messages(context: context)
             model.text = data.text
             model.date = data.date
-                
+            
             
             do {
                 try context.save()
@@ -88,6 +84,37 @@ class CoreDataGatewayImp: CoreDataGateway {
                 print("ошибка сохранения \(error.localizedDescription)")
 #endif
             }
+        }
+    }
+    
+    func deleteData(withText text: String, at date: Date) {
+        let fetchRequest: NSFetchRequest<Messages> = Messages.fetchRequest()
+        
+        var predicates: [NSPredicate] = []
+        
+        let textPredicate = NSPredicate(format: "text == %@", text)
+        predicates.append(textPredicate)
+        
+        let datePredicate = NSPredicate(format: "date == %@", date as NSDate)
+        predicates.append(datePredicate)
+        
+        
+        let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
+        fetchRequest.predicate = compoundPredicate
+        
+        do {
+            let data = try coreDataStack.managedContext.fetch(fetchRequest)
+            
+            data.forEach { object in
+                coreDataStack.managedContext.delete(object)
+            }
+            
+            saveContext()
+            
+        } catch let error {
+#if DEBUG
+            print("ошибка удаления 1 элемента: \(error.localizedDescription)")
+#endif
         }
     }
     

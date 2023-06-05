@@ -17,44 +17,38 @@ extension DetailViewController {
         setupDeleteButton()
         setupImageView()
         setupDateLabel()
+        setupNavBar()
     }
     
-    func setupBaseLabel(frame: CGRect, data: MessageType?) {
+    func setupBaseLabel(frame: CGRect, data: MessageModel?) {
         guard let data else { return }
         let y = frame.origin.y < 200 ? 200 : frame.origin.y
         baseView.layer.cornerRadius = 15
         baseView.clipsToBounds = true
-        
-        switch data {
-        case let .outgoing(text, url, date):
-            messageLabel.text = text
-            dateLabel.text = format(from: date, to: "dd.MM.YY")
+        messageLabel.text = data.text
+        dateLabel.text = presenter?.formatDate(from: data.date, to: "dd.MM.YY")
+        if data.isMyMessage {
             baseView.backgroundColor(UIColor(named: "appOutgoingMessage") ?? .purple)
-            baseView.frame = CGRect(x: frame.origin.x + 50, y: y, width: frame.width - 90, height: frame.height)
+            baseView.frame = CGRect(x: frame.origin.x + 40, y: y, width: frame.width - 80, height: frame.height)
             isIncomingMessage = false
-            
-        case let .incoming(text, url, date):
-            dateLabel.text = format(from: date, to: "dd.MM.YY")
-            messageLabel.text = text
+            messageLabel.alignment(.right)
+        } else {
             baseView.backgroundColor(UIColor(named: "appIncomeMessage") ?? .blue)
-            baseView.frame = CGRect(x: frame.origin.x + 40, y: y, width: frame.width - 90, height: frame.height)
+            baseView.frame = CGRect(x: frame.origin.x + 40, y: y, width: frame.width - 80, height: frame.height)
             isIncomingMessage = true
+            messageLabel.alignment(.left)
         }
     }
-    
-//    private func configureNavBar() {
-//        navigationController?.navigationBar.isHidden = false
-//    }
     
     private func setupMessageLabel() {
         baseView.addSubview(messageLabel)
         messageLabel.backgroundColor = .clear
         messageLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            messageLabel.leadingAnchor.constraint(equalTo: baseView.leadingAnchor, constant: 15),
-            messageLabel.topAnchor.constraint(equalTo: baseView.topAnchor, constant: 10),
-            messageLabel.bottomAnchor.constraint(equalTo: baseView.bottomAnchor, constant: -10),
-            messageLabel.trailingAnchor.constraint(equalTo: baseView.trailingAnchor, constant: -15)
+            messageLabel.leadingAnchor.constraint(equalTo: baseView.leadingAnchor, constant: 10),
+            messageLabel.topAnchor.constraint(equalTo: baseView.topAnchor, constant: 5),
+            messageLabel.bottomAnchor.constraint(equalTo: baseView.bottomAnchor, constant: -5),
+            messageLabel.trailingAnchor.constraint(equalTo: baseView.trailingAnchor, constant: -10)
         ])
     }
     
@@ -111,17 +105,31 @@ extension DetailViewController {
         }
     }
     
-    
-    //////////
-    ///
-    ///
-    func format(from date: Date, to mask: String) -> String? {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = mask
-        let formattedDate = dateFormatter.string(from: date)
-        return formattedDate
+    private func setupNavBar() {
+            if #available(iOS 13.0, *) {
+            let appearance = UINavigationBarAppearance()
+            appearance.titleTextAttributes = [
+                .foregroundColor: UIColor(named: "appMediumBlack") ?? .purple
+            ]
+            appearance.backgroundColor = UIColor(named: "appMediumBlack")
+            
+            UINavigationBar.appearance().standardAppearance = appearance
+            UINavigationBar.appearance().isTranslucent = false
+        } else {
+            navigationController?.navigationBar.barTintColor = UIColor(named: "appMediumBlack")
+        }
+        if #available(iOS 15, *) {
+            let appearance = UINavigationBarAppearance()
+            appearance.configureWithOpaqueBackground()
+            appearance.titleTextAttributes = [
+                .foregroundColor: UIColor(named: "appMediumBlack") ?? .purple
+            ]
+            appearance.backgroundColor = UIColor(named: "appMediumBlack")
+            UINavigationBar.appearance().standardAppearance = appearance
+            UINavigationBar.appearance().scrollEdgeAppearance = appearance
+        }
+        navigationController?.navigationBar.barTintColor = UIColor(named: "appMediumBlack")
+        navigationController?.navigationBar.backgroundColor = UIColor(named: "appMediumBlack")
+        navigationController?.navigationBar.isTranslucent = false
     }
-    
-    ///
-    ///////
 }

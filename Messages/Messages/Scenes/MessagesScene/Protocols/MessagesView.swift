@@ -18,4 +18,8 @@ protocol MessagesView: BaseView {
     func showErrorAlert(message: String)
     
     func reload()
+    
+    func startActivity()
+    
+    func stopActivity()
 }

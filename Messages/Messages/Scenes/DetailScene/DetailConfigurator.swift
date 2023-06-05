@@ -11,7 +11,7 @@ enum DetailConfigurator {
     
     static func configure(view: DetailViewController,
                           frame: CGRect,
-                          data: MessageType?,
+                          data: MessageModel?,
                           indexPath: Int,
                           completion: @escaping (_ index: Int) -> ()) {
         let presenter = DetailPresenterImp(view, completion: completion)
@@ -19,12 +19,11 @@ enum DetailConfigurator {
         presenter.currentMessageIndex = indexPath
         view.presenter = presenter
         view.currentMessageFrame = frame
-//        view.setupBaseLabel(frame: frame, data: data)
     }
 
     static func open(navigationController: UINavigationController,
                      frame: CGRect,
-                     data: MessageType?,
+                     data: MessageModel?,
                      indexPath: Int,
                      completion: @escaping (_ index: Int) -> ()) {
         let view = DetailViewController()

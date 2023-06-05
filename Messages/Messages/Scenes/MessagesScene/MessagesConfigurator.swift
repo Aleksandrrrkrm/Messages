@@ -17,5 +17,9 @@ enum MessagesConfigurator {
         view.presenter = presenter
         NotificationCenter.default.addObserver(presenter, selector: #selector(presenter.appWillEnterForeground),
                                                name: .appWillEnterForeground, object: nil)
+        NotificationCenter.default.addObserver(view, selector: #selector(view.keyboardWillShow(_:)),
+                                               name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(view, selector: #selector(view.keyboardWillHide(_:)),
+                                               name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 }

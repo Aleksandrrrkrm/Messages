@@ -1,13 +1,20 @@
 //
-//  MessageModel.swift
+//  OutgoingMessageModel.swift
 //  Messages
 //
-//  Created by Александр Головин on 31.05.2023.
+//  Created by Александр Головин on 01.06.2023.
 //
 
 import Foundation
 
-// MARK: - MessageData
-struct MessageData: Decodable {
-    let result: [String]
+struct MessageModel {
+    let isMyMessage: Bool
+    let url: String
+    let text: String
+    let date: Date
+}
+
+enum MessageType {
+    case incoming(String, String, Date)
+    case outgoing(String, String, Date)
 }

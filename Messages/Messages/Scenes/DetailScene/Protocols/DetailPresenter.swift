@@ -9,7 +9,11 @@ import Foundation
 
 protocol DetailPresenter {
     
-    func getMessageType() -> MessageType?
+    func getMessageType() -> MessageModel?
     
     func deleteAndBack()
+    
+    func getData()
+    
+    func formatDate(from date: Date, to mask: String) -> String?
 }

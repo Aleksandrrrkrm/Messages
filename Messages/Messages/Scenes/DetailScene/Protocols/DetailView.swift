@@ -9,4 +9,7 @@ import UIKit
 
 protocol DetailView: BaseView {
     
+    func configureUI(type: MessageModel)
+    
+    func setImage(_ image: UIImage)
 }
