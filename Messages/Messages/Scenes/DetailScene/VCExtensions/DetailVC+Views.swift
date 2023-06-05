@@ -17,7 +17,6 @@ extension DetailViewController {
         setupDeleteButton()
         setupImageView()
         setupDateLabel()
-        setupNavBar()
     }
     
     func setupBaseLabel(frame: CGRect, data: MessageModel?) {
@@ -103,33 +102,5 @@ extension DetailViewController {
         } else {
             dateLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 55).isActive = true
         }
-    }
-    
-    private func setupNavBar() {
-            if #available(iOS 13.0, *) {
-            let appearance = UINavigationBarAppearance()
-            appearance.titleTextAttributes = [
-                .foregroundColor: UIColor(named: Colors.appMediumBlack.rawValue) ?? .purple
-            ]
-            appearance.backgroundColor = UIColor(named: Colors.appMediumBlack.rawValue)
-            
-            UINavigationBar.appearance().standardAppearance = appearance
-            UINavigationBar.appearance().isTranslucent = false
-        } else {
-            navigationController?.navigationBar.barTintColor = UIColor(named: Colors.appMediumBlack.rawValue)
-        }
-        if #available(iOS 15, *) {
-            let appearance = UINavigationBarAppearance()
-            appearance.configureWithOpaqueBackground()
-            appearance.titleTextAttributes = [
-                .foregroundColor: UIColor(named: Colors.appMediumBlack.rawValue) ?? .purple
-            ]
-            appearance.backgroundColor = UIColor(named: Colors.appMediumBlack.rawValue)
-            UINavigationBar.appearance().standardAppearance = appearance
-            UINavigationBar.appearance().scrollEdgeAppearance = appearance
-        }
-        navigationController?.navigationBar.barTintColor = UIColor(named: Colors.appMediumBlack.rawValue)
-        navigationController?.navigationBar.backgroundColor = UIColor(named: Colors.appMediumBlack.rawValue)
-        navigationController?.navigationBar.isTranslucent = false
     }
 }

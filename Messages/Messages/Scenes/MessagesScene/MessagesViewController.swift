@@ -69,6 +69,13 @@ class MessagesViewController: UIViewController {
         hideKeyboard()
     }
     
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+         coordinator.animate(alongsideTransition: { context in
+             self.titleView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height / 9)
+         })
+    }
+    
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
