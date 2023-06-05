@@ -20,6 +20,7 @@ extension MessagesViewController {
     private func setupBaseView() {
         view.backgroundColor = UIColor(named: Colors.appDarkBlue.rawValue)
         baseView.backgroundColor = UIColor(named: Colors.appDarkBlue.rawValue)
+        activityIndicator.color = UIColor(named: "appActivity")
         view.addSubview(baseView)
         baseView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([

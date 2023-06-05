@@ -7,12 +7,7 @@
 
 import UIKit
 
-class MessageTableViewCell: BaseMessageTableViewCell {
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
-    }
+final class MessageTableViewCell: BaseMessageTableViewCell {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
@@ -26,8 +21,6 @@ class MessageTableViewCell: BaseMessageTableViewCell {
     private func setupBaseLabel() {
         contentView.addSubview(baseView)
         baseView.backgroundColor = UIColor(named: Colors.appIncomeMessage.rawValue)
-        baseView.layer.cornerRadius = 15
-        baseView.clipsToBounds = true
         baseView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             baseView.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: 5),

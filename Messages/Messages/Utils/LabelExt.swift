@@ -22,13 +22,6 @@ extension UILabel {
     }
     
     @discardableResult
-    func corner(radius: CGFloat) -> Self {
-        self.layer.cornerRadius = radius
-        self.clipsToBounds = true
-        return self
-    }
-    
-    @discardableResult
     func color(textColor color: UIColor) -> Self {
         self.textColor = color
         return self

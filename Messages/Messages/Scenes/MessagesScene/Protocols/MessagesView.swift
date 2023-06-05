@@ -17,7 +17,7 @@ protocol MessagesView: BaseView {
     
     func showErrorAlert(message: String)
     
-    func reload()
+    func reloadTableView()
     
     func startActivity()
     

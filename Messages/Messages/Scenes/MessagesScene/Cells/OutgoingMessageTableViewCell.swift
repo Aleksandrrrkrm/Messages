@@ -7,11 +7,11 @@
 
 import UIKit
 
-class OutgoingMessageTableViewCell: BaseMessageTableViewCell {
+final class OutgoingMessageTableViewCell: BaseMessageTableViewCell {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        
+
         setupContentView()
         setupLabel()
         setupProfileImageView()
@@ -21,8 +21,6 @@ class OutgoingMessageTableViewCell: BaseMessageTableViewCell {
     private func setupBaseLabel() {
         contentView.addSubview(baseView)
         baseView.backgroundColor = UIColor(named: Colors.appOutgoingMessage.rawValue)
-        baseView.layer.cornerRadius = 15
-        baseView.clipsToBounds = true
         baseView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             baseView.trailingAnchor.constraint(equalTo: profileImageView.leadingAnchor, constant: -5),

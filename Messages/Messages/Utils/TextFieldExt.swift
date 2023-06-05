@@ -39,13 +39,6 @@ extension UITextField {
     }
     
     @discardableResult
-    func corner(radius: CGFloat) -> Self {
-        self.layer.cornerRadius = radius
-        self.clipsToBounds = true
-        return self
-    }
-    
-    @discardableResult
     func color(backgraundColor: UIColor) -> Self {
         self.backgroundColor = backgraundColor
         return self

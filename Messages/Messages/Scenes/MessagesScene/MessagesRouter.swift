@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MessagesRouter {
+final class MessagesRouter {
     
     weak var view: UIViewController?
     
@@ -15,7 +15,7 @@ class MessagesRouter {
         self.view = view
     }
     
-    func openSomeScene(frame: CGRect,
+    func openDetailScene(frame: CGRect,
                        data: MessageModel?,
                        indexPath: Int,
                        completion: @escaping (_ index: Int) -> ()) {

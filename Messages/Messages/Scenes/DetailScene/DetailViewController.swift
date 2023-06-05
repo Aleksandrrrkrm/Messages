@@ -61,8 +61,8 @@ class DetailViewController: UIViewController {
     
     @objc
     func deletePressed() {
+        presenter?.deleteAndBack()
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-            self.presenter?.deleteAndBack()
             self.navigationController?.popViewController(animated: true)
         }
         UIView.animate(withDuration: 0.1) { [weak self] in
@@ -78,8 +78,8 @@ class DetailViewController: UIViewController {
 extension DetailViewController: DetailView {
     
     func setImage(_ image: UIImage) {
-        performInMainThread {
-            self.imageView.image = image
+        performInMainThread { [weak self] in
+            self?.imageView.image = image
         }
     }
     

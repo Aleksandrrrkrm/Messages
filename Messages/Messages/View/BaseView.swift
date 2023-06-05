@@ -20,11 +20,13 @@ extension BaseView {
             }
         }
     }
+}
+
+extension BaseView where Self: UIViewController {
     
     func showAlert(withTitle title: String,
                    message: String,
                    actionTitle: String?,
-                   viewController: UIViewController,
                    settingsHandler: (() -> Void)? = nil) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         if let actionTitle {
@@ -35,6 +37,6 @@ extension BaseView {
         }
         let cancelAction = UIAlertAction(title: Strings.cancel.rawValue, style: .cancel)
         alertController.addAction(cancelAction)
-        viewController.present(alertController, animated: true, completion: nil)
+        self.present(alertController, animated: true, completion: nil)
     }
 }

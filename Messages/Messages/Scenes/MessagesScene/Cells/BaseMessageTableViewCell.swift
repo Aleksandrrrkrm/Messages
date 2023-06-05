@@ -15,6 +15,7 @@ class BaseMessageTableViewCell: UITableViewCell {
 
     var baseView = UIView()
         .backgroundColor(UIColor(named: Colors.appDarkBlue.rawValue) ?? .gray)
+        .corner(radius: 15)
     
     var messageLabel = UILabel()
         .color(textColor: .white)

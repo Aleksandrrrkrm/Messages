@@ -26,8 +26,8 @@ extension MessagesViewController: UITableViewDelegate, UITableViewDataSource {
         }
         cell.transform = CGAffineTransform(scaleX: 1, y: -1)
         outCell.transform = CGAffineTransform(scaleX: 1, y: -1)
-        cell.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(longtap(_:))))
-        outCell.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(longtap(_:))))
+        cell.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(handleLongtap(_:))))
+        outCell.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(handleLongtap(_:))))
         
         let currentData = data[indexPath.row]
         

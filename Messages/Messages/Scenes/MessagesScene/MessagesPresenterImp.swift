@@ -7,7 +7,7 @@
 
 import Foundation
 
-class MessagesPresenterImp: MessagesPresenter {
+final class MessagesPresenterImp: MessagesPresenter {
     
     private weak var view: MessagesView?
     private let router: MessagesRouter
@@ -78,11 +78,11 @@ class MessagesPresenterImp: MessagesPresenter {
     func deleteRow(_ index: Int) {
         coreDataGateway.deleteData(withText: allMessages[index].text, at: allMessages[index].date)
         allMessages.remove(at: index)
-        view?.reload()
+        view?.reloadTableView()
     }
     
     func openDetailScene(frame: CGRect, indexPath: Int) {
-        router.openSomeScene(frame: frame,
+        router.openDetailScene(frame: frame,
                              data: allMessages[indexPath],
                              indexPath: indexPath, completion: deleteRow)
     }

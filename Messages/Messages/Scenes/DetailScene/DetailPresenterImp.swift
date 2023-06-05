@@ -7,7 +7,7 @@
 
 import Foundation
 
-class DetailPresenterImp: DetailPresenter {
+final class DetailPresenterImp: DetailPresenter {
     
     private weak var view: DetailView?
     

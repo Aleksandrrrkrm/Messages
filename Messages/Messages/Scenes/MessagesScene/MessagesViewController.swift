@@ -69,15 +69,16 @@ class MessagesViewController: UIViewController {
         hideKeyboard()
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    // MARK: - Transition
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
          coordinator.animate(alongsideTransition: { context in
              self.titleView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height / 9)
          })
-    }
-    
-    deinit {
-        NotificationCenter.default.removeObserver(self)
     }
     
     // MARK: - Usage
@@ -102,7 +103,7 @@ class MessagesViewController: UIViewController {
         textField.resignFirstResponder()
     }
     
-    @objc func longtap(_ gesture: UILongPressGestureRecognizer) {
+    @objc func handleLongtap(_ gesture: UILongPressGestureRecognizer) {
         if gesture.state == .began {
             if let cell = gesture.view as? UITableViewCell {
                 if let indexPath = tableView.indexPath(for: cell) {
@@ -134,23 +135,22 @@ class MessagesViewController: UIViewController {
 extension MessagesViewController: MessagesView {
     
     func startActivity() {
-        performInMainThread {
-            self.activityIndicator.startAnimating()
+        performInMainThread { [weak self] in
+            self?.activityIndicator.startAnimating()
         }
     }
     
     func stopActivity() {
-        performInMainThread {
-            self.activityIndicator.stopAnimating()
+        performInMainThread { [weak self] in
+            self?.activityIndicator.stopAnimating()
         }
     }
     
     func showInternetAlert() {
-        performInMainThread {
-            self.showAlert(withTitle: Strings.notAvailable.rawValue,
+        performInMainThread { [weak self] in
+            self?.showAlert(withTitle: Strings.notAvailable.rawValue,
                            message: Strings.checkInternetConnection.rawValue,
-                           actionTitle: Strings.settings.rawValue,
-                           viewController: self) {
+                           actionTitle: Strings.settings.rawValue) {
                 if let url = URL(string: UIApplication.openSettingsURLString) {
                     if UIApplication.shared.canOpenURL(url) {
                         UIApplication.shared.open(url, options: [:], completionHandler: nil)
@@ -161,35 +161,34 @@ extension MessagesViewController: MessagesView {
     }
     
     func showErrorAlert(message: String) {
-        performInMainThread {
-            self.showAlert(withTitle: Strings.errorTitle.rawValue,
+        performInMainThread { [weak self] in
+            self?.showAlert(withTitle: Strings.errorTitle.rawValue,
                            message: message,
-                           actionTitle: Strings.retry.rawValue,
-                           viewController: self) {
-                self.presenter?.loadNextPage()
+                           actionTitle: Strings.retry.rawValue) {
+                self?.presenter?.loadNextPage()
             }
         }
     }
     
-    func reload() {
-        performInMainThread {
-            self.tableView.reloadData()
+    func reloadTableView() {
+        performInMainThread { [weak self] in
+            self?.tableView.reloadData()
         }
     }
     
     func deleteRow(_ indexPaths: [IndexPath]) {
-        performInMainThread {
-            self.tableView.beginUpdates()
-            self.tableView.deleteRows(at: indexPaths, with: .automatic)
-            self.tableView.endUpdates()
+        performInMainThread { [weak self] in
+            self?.tableView.beginUpdates()
+            self?.tableView.deleteRows(at: indexPaths, with: .automatic)
+            self?.tableView.endUpdates()
         }
     }
     
     func reloadTableView(_ indexPaths: [IndexPath]) {
-        performInMainThread {
-            self.tableView.beginUpdates()
-            self.tableView.insertRows(at: indexPaths, with: .automatic)
-            self.tableView.endUpdates()
+        performInMainThread { [weak self] in
+            self?.tableView.beginUpdates()
+            self?.tableView.insertRows(at: indexPaths, with: .automatic)
+            self?.tableView.endUpdates()
         }
     }
 }
