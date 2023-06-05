@@ -11,6 +11,7 @@ extension DetailViewController {
     
     func setupUI() {
         view.addSubview(baseView)
+        navigationController?.navigationBar.tintColor = .white
         baseView.alpha = 0
         view.backgroundColor = UIColor(named: Colors.appDarkBlue.rawValue)
         setupMessageLabel()
