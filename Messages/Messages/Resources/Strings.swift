@@ -43,4 +43,5 @@ enum Colors: String {
     case appMediumBlue = "appMediumBlue"
     case appOutgoingMessage = "appOutgoingMessage"
     case appIncomeMessage = "appIncomeMessage"
+    case appActivity = "appActivity"
 }

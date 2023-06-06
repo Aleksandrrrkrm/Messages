@@ -18,6 +18,7 @@ extension DetailViewController {
         setupDeleteButton()
         setupImageView()
         setupDateLabel()
+        configureNavBar()
     }
     
     func setupBaseLabel(frame: CGRect, data: MessageModel?) {
@@ -103,5 +104,11 @@ extension DetailViewController {
         } else {
             dateLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 55).isActive = true
         }
+    }
+    
+    private func configureNavBar() {
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.isTranslucent = true
     }
 }
